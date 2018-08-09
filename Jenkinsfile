@@ -9,17 +9,25 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Build') {
+        stage('Sheep') {
+            agent {
+                docker {
+                    image: 'node:10-alpine'
+                    args: '-p 3000:3000'
+                }
+            }
             steps {
+		sh 'npm --version'
+		sh 'node --version'
                 sh 'npm install'
             }
         }
-        stage('Test') {
+        stage('Goat') {
             steps {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deliver') { 
+        stage('Chimpanzee') { 
             steps {
                 sh './jenkins/scripts/deliver.sh' 
                 input message: 'Finished using the web site? (Click "Proceed" to continue)' 
