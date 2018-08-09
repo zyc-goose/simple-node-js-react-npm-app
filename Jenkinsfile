@@ -22,7 +22,7 @@ pipeline {
             agent {
                 docker {
                     image 'nginx'
-                    args '-p 3000:80 -v build:/usr/share/nginx/html:ro'
+                    args '-p 3000:80'
                 }
             }
             steps {
