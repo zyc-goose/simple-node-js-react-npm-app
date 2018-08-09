@@ -20,7 +20,10 @@ pipeline {
         }
         stage('Chimpanzee') { 
             agent {
-                dockerfile true
+                docker {
+                    image 'nginx'
+                    args '-p 3000:80 -v build:/usr/share/nginx/html:ro'
+                }
             }
             steps {
                 input message: 'Finished using the web site? (Click "Proceed" to continue)' 
