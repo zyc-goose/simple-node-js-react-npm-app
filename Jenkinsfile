@@ -1,6 +1,8 @@
 pipeline {
     agent {
-        image 'ubuntu:xenial'
+        docker {
+            image 'ubuntu:xenial'
+        }
     }
     environment { 
         CI = 'true'
