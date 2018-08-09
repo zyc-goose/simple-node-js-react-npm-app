@@ -11,9 +11,10 @@ pipeline {
     stages {
         stage('Sheep') {
             steps {
-		sh 'npm --version'
-		sh 'node --version'
+		        sh 'npm --version'
+		        sh 'node --version'
                 sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Goat') {
@@ -22,6 +23,9 @@ pipeline {
             }
         }
         stage('Chimpanzee') { 
+            agent {
+                dockerfile true
+            }
             steps {
                 sh './jenkins/scripts/deliver.sh' 
                 input message: 'Finished using the web site? (Click "Proceed" to continue)' 
